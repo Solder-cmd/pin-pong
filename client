@@ -3,6 +3,12 @@ import socket
 import json
 from threading import Thread
 
+from launcher import launcher
+
+player_name, ball_color = launcher()
+print("Ім'я гравця:", player_name)
+print("Колір шарика:", ball_color)
+
 # ---ПУГАМЕ НАЛАШТУВАННЯ ---
 WIDTH, HEIGHT = 800, 600
 init()
@@ -88,11 +94,11 @@ while True:
         continue  # Блокує гру після перемоги
 
     if game_state:
-        screen.fill((255, 255, 0))  # <-- ЖЁЛТЫЙ ФОН
+        screen.fill((20, 60, 20))
 
         draw.rect(screen, (0, 255, 0), (20, game_state['paddles']['0'], 20, 100))
         draw.rect(screen, (255, 0, 255), (WIDTH - 40, game_state['paddles']['1'], 20, 100))
-        draw.circle(screen, (255, 255, 255),
+        draw.circle(screen, ball_color,
                     (game_state['ball']['x'], game_state['ball']['y']), 10)
         score_text = font_main.render(f"{game_state['scores'][0]} : {game_state['scores'][1]}", True, (255, 255, 255))
         screen.blit(score_text, (WIDTH // 2 -25, 20))
